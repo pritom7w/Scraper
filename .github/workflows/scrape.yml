@@ -1,26 +1,27 @@
 name: Scrape PayPal Emails
+
 on:
   schedule:
-    - cron: 0 0 * * * *
+    - cron: "0 0 * * *" # Every day at 00:00 UTC
+  workflow_dispatch: # Allows manual execution from the Actions tab
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
+
+steps:
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Setup Python 3.9.7
+
+- name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.9.7
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
-      - name: Scrape PayPal Emails
+          python-version: "3.9"
+
+- name: Install dependencies
         run: |
-            payload = 'import requests
-            from bs4 import BeautifulSoup
-            from datetime import datetime
-            with open('./paypal_data.json', 'w') as f:
-                f.write(requests.get("https://www.amazon.com/").text())
-                df = pd.read_json(f'{dt.date.today().strftime("%Y-%m-%d")}_paypal_data.json')
-                df['Date'] = pd.to_datetime(df['Date'])
-                df.to_csv('paypal_data.json', index=False)
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+- name: Run scraper
+        run: python scrape.py
