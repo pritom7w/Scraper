@@ -2,8 +2,8 @@ name: Scrape PayPal Emails
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Every day at 00:00 UTC
-  workflow_dispatch: # Allows manual execution from the Actions tab
+    - cron: "0 0 * * *"
+  workflow_dispatch:
 
 jobs:
   scrape:
@@ -16,7 +16,7 @@ steps:
 - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.9.7"
 
 - name: Install dependencies
         run: |
