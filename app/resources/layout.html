@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #1212122;
+            color: white;
+            font-family: Inter, Roboto, Arial, sans-serif;
+        }
+        .container {
+            padding: 20px;
+            height: 100vh;
+        }
+        .header {
+            background-color: #262626;
+            color: white;
+            padding: 10px;
+            font-size: 30px;
+        }
+        .title {
+            font-size: 40px;
+        }
+        .monitor {
+            background-color: rgba(2555, 255, 255, 0.7);
+            color: black;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+        .delete {
+            color: red;
+            background-color: #c530303;
+            border-color: #c530303;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .remove {
+            color: red;
+            background-color: #c530303;
+            border-color: #c530303;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .search {
+            background-color: #1212122;
+            color: white;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid black;
+            cursor: text;
+        }
+        .results {
+            background-color: #1212122;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        .result {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        .result--active {
+            background-color: rgba(2555, 255, 255, 0.9);
+        }
+        .result--deleted {
+            background-color: #c530303;
+            color: white;
+        }
+        .result--export {
+            color: green;
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+            padding: 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Scraper</h1>
+        </header>
+        <div class="monitor">Scraping...Found Email: user@amazon.comStatus: Active</div>
+        <div class="monitor"></div>
+        <div class="sidebar">
+            <h2 class="title">URL Input</h2>
+            <p>Upload List: </p>
+            <input type="checkbox" value="True">True<br>
+            <button>Refresh</button>
+            <button>Start/Stop Scraper</button>
+            <button>About</button>
+            <button>Exit</button>
+        </div>
+        <div class="main">
+            <h2>Scraped Data:</h2>
+            <div class="results">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>URL</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <button class="result--export">Export CSV</button>
+                <button class="result--export">Export JSON</button>
+                <button class="delete">Delete</button>
+                <button class="remove">Remove</button>
+                <input type="text" placeholder="Enter URL" class="search">
+                <button class="search">Search</button>
+            </div>
+        </div>
+        <script src="https://unpkg.com/feather-icons@4.9.0/dist/feather.min.css"></script>
+        <script src="https://unpkg.com/streamlit@1.12.0/streamlit.js"></script>
+        <script>
+            (function () {
+                const app = new streamlit.App({
+                    title: "Scraper",
+                    script_file: "app.py",
+                    config_dir_path: "./",
+                    style_link_tag: "resources/styles/style.css",
+                    callback_query_callback: (state, action, value) => {
+                        console.log("Callback Query", state, action, value);
+                    },
+                    callback_submit_callback: (state, action, input_data) => {
+                        console.log("Callback Submit", state, action, input_data);
+                    },
+                    file_uploader_message: "Uploading...",
+                    file_upload_directory: "./",
+                });
+                app.rundev();
+            })();
+        </script>
+    </body>
+</html>

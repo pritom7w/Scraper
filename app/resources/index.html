@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scraper</title>
+    <style>
+        background-color: #1212122;
+        color: white;
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Scraper</h1>
+        </div>
+        <div class="main">
+            <h2>Scraped Data:</h2>
+            <div class="results">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>URL</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ body }}
+                    </tbody>
+                </table>
+                <button class="result--export">Export CSV</button>
+                <button class="result--export">Export JSON</button>
+                <button class="delete">Delete</button>
+                <button class="remove">Remove</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/feather-icons@4.9.0/dist/feather.min.css"></script>
+    <script src="https://unpkg.com/streamlit@1.12.0/streamlit.js"></script>
+    <script>
+        (function () {
+            const app = new streamlit.App({
+                title: "Scraper",
+                script_file: "app.py",
+                config_dir_path: "./",
+                style_link_tag: "resources/styles/style.css",
+                callback_query_callback: (state, action, value) => {
+                    console.log("Callback Query", state, action, value);
+                },
+                callback_submit_callback: (state, action, input_data) => {
+                    console.log("Callback Submit", state, action, input_data);
+                },
+                file_uploader_message: "Uploading...",
+                file_upload_directory: "./",
+            });
+            app.rundev();
+        })();
+    </script>
+</body>
+</html>
