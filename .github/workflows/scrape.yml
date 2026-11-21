@@ -1,7 +1,7 @@
 name: Scrape PayPal Emails
 on:
   schedule:
-    - cron: '0 0 * * * *'
+    - cron: 0 0 * * * *
 jobs:
   scrape:
     runs-on: ubuntu-latest
