@@ -1,0 +1,5 @@
+config/secret.yml
+.env
+__pycache__/
+*.pyc
+paypal_data.json
